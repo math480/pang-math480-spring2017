@@ -1,0 +1,109 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Law of Large Numbers}
+\author{Boyuan Pang}
+\date{May 2017}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+
+\begin{document}
+
+\maketitle
+
+
+\section{Definition}
+\hspace{4mm} In probability, the law of large numbers (LLN) is
+a theorem that describes the average of the results obtained from a large number of trials should be close to the expected value, and will tend to become closer as more trials are performed.
+There is another theory which states that this has already happened.
+
+\section{Historical Background}
+\hspace{4mm} Early in the sixteenth century, Italian mathematician Gerolamo Cardano observed that in statistics the accuracy of observations tended to improve as the number of trials increased. \\ 
+\indent This conjecture was first proved by Swiss mathematician Jacob Bernoulli in 1713. \\
+\indent The official name of the theorem; “The Law of Large Numbers”, was coined in 1837 by French mathematician Simeon Denis Poisson.
+
+\section{Forms}
+\subsection{General Form}
+\hspace{4mm} Let $X_1 $,$X_2$,... $X_n$ be an infinite sequence of independent and identically distributed random variables with expected value $E(X_1)=E(X_2)=...=u$, the sample average $\bar{X}_n=\frac{1}{n}(X_1+X_2+...+X_n)$ converges to the expacted value $\bar X_n  \to u$ for $n \to \infty$.\\ 
+\\ \indent Example: The expected value of single six-sided die roll is :\\ $E(X)=\frac{1}{6}(1+2+3+4+5+6)=3.5$, according LLN, if the number of trials is large enough, the average of the trials will be 3.5.\\
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.5]{math_480.jpg}
+\caption{Average dice roll by number of rolls, graph from\\ 
+Law of large numbers. (2017, May 6). Wikipedia,\\ ${https://en.wikipedia.org/w/index.php?title=Law_of_large_numbers&oldid=778979251}$ }
+\label{}
+\end{figure}
+
+\subsection{Weak Law of Large Number (WLLN)}
+\hspace{4mm} Let $X_1 $,$X_2$,... $X_n$ be a sequence of independent and identically distributed random variable, each with mean $E(X_1)=E(X_2)=...=u$, standard deviation $\sigma$, and a positive real number $\epsilon$, the Weak Law of Large Numbers states for all $\epsilon >0$,\\ $\lim\limits_{n \to \infty}P( |\bar{X}_n-u|> \epsilon)=0$
+\subsection{Strong Law of Large Number (SLLN)}
+\hspace{4mm} Let $X_1 $,$X_2$,... $X_n$ be an infinite sequence of independent and identically distributed random variables with expected value $E(X_1)=E(X_2)=...=u$, the sample average converges almost surely to the expected value.\\
+That is $P(\lim\limits_{n \to \infty} \bar X_n = u) =1$
+
+\section{Proof of Weak Law of Large Numbers}
+\subsection{Markov's Inequality}
+\hspace{4mm} Let X be a non-negative random variable and suppose that E(X) exists. For any positive real number a, 
+$P(X \geq a)\leq\frac{E(X)}{a}$.\\
+Proof: since X $>$ 0,\\ \\
+$E(X)=\int_{0}^{\infty}xf(x)dx$\\
+\indent \indent $=\int_{0}^{a}xf(x)dx+\int_{a}^{\infty}xf(x)dx$\\
+\indent \indent $=\int_{0}^{a}xf(x)dx+\int_{a}^{\infty}xf(x)dx$ \\
+\indent \indent $\geq\int_{a}^{\infty}xf(x)dx $ \\
+\indent \indent $=aP(X\geq a)$ \\
+so we have $P(X \geq a) \leq \frac{E(X)}{a}$ 
+
+\subsection{Chebyshev's Inequality}
+\hspace{4mm} If X is random variable X , with expectation $E(X)=u$, then for any a $>$ 0, $P||X-u| \geq a| \leq \frac{Var(X)}{a^2}$.
+Proof: Define $Y=(X-E(X))^2$, for any positive real number a, apply Markov's Inequality, we have $P(Y \geq a^2)\leq \frac{E(Y)}{a^2}$,\\
+note that $E(Y)=E(X-E(X))^2=Var(X)$,\\
+Thus $P||X-u| \geq a| = P|(X-E(X))^2 \geq a^2|$\\
+\indent \indent \indent \indent \indent $=P|Y\geq a^2|$ \\
+\indent \indent \indent \indent \indent $\leq \frac{E(Y)}{a^2}$\\
+\indent \indent \indent \indent \indent $=\frac{Var(X)}{a^2}$
+
+\subsection{Proof}
+\hspace{4mm} Assume that $Var(X_i)=\sigma^2$, for all $i<\infty$. Since 
+$X_1 $,$X_2$,... $X_n$ are independent, there is no correlation between them. Thus\\ \\
+$Var(\bar{X}_n)=Var(\frac{X_1+X_2+...+X_n}{n})$\\
+\indent \indent \indent $=\frac{1}{n^2}Var(X_1+X_2+...+X_n)$\\
+\indent \indent \indent $=\frac{1}{n^2}(Var(X_1)+Var(X_2)+...+Var(X_n))$\\
+\indent \indent \indent $=\frac{1}{n^2}(\sigma^2+\sigma^2+...+\sigma^2)$\\
+\indent \indent \indent $=\frac{n\sigma^2}{n^2}$\\
+\indent \indent \indent $=\frac{\sigma^2}{n}$ for n $>$ 1\\
+Therefore, combine Chebyshev's Inequality and Markov's Inequality, 
+We have \\ \\
+$\lim\limits_{n \to \infty}P( |\bar{X}_n-u|> \epsilon) \leq \frac{Var(X)}{\epsilon ^2}$\\
+\indent \indent \indent \indent \indent \indent 
+$=\frac{\sigma ^2}{n \epsilon ^2}$\\
+\indent \indent \indent \indent \indent \indent
+$=0$ as $n \to \infty$.
+
+\section{Application of WLLN}
+\hspace{4mm} Suppose someone gives you a coin and claims that the coin is biased, that it lands on heads only 45\%  of the time. If you want to be 95\% confident that the coin is indeed biased, how many times must you flip the coin?\\
+\indent Solution:(Using WLLN): let X be the random variable such that X=1 if the coin lands on heads and X=0 for tails.\\
+Thus $u=0.45=p$,\\
+and $\sigma ^2=p(1-p)=0.45*0.55=0.2475$,\\
+the percent error is $50\%-45\%=5\%$, let $\epsilon = 0.05$,\\
+by LLN, we have $P||\bar X-0.45|>0.05| \leq \frac{0.2475}{n(0.05)^2}$,\\
+for a 95\% confidence interval,\\
+we need $\frac{0.2475}{n(0.05)^2}=0.05$,\\
+Thus n is 1980.
+
+\section{Difference Between WLLN and SLLN }
+\hspace{4mm} The weak law states that for a specified large n, the average is likely to be near u.\\
+\indent The strong law shows that this almost surely will.\\
+\indent The convergence of the Strong Law is more powerful.\\
+
+\section{Conclusion}
+
+\hspace{4mm} The Law of Large Numbers is very useful and can be applied to a variety of disciplines including probability, statistics and finance. For example insurance companies can use the law of large numbers to predict the possible losses in the future, and the predict will be more confident as numbers of insures gets larger.
+
+\section{Reference}
+
+\bibitem {A} Loève 1977, Chapter 17.3, p. 251
+\bibitem {B} Sedor, K. 2015, The Law of Large Numbers and its Applications.
+\bibitem {C} Law of large numbers. (2017, May 1). Wikipedia, retrieved from \\${https://en.wikipedia.org/w/index.php?title=Law_of_large_numbers&oldid=778979251}$
+
+
+\end{document}
